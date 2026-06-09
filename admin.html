@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hillfort Matriculation Higher Secondary School admin panel." />
+  <title>Admin Panel | Hillfort Matriculation Higher Secondary School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="public/css/styles.css" />
+  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+  <style>
+    .admin-dashboard-body {
+      background-color: #f5f5f5;
+    }
+
+    .admin-site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid rgba(46, 125, 92, 0.08);
+    }
+
+    .admin-navbar {
+      position: relative;
+      width: min(calc(100% - 24px), var(--container));
+      margin: 0 auto;
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      justify-content: space-between;
+    }
+
+    .admin-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .admin-brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #2E7D5C 0%, #3ea874 100%);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(46, 125, 92, 0.15);
+    }
+
+    .admin-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-brand-text strong {
+      font-size: 0.98rem;
+      color: #1d2433;
+    }
+
+    .admin-brand-text small {
+      color: #657083;
+      font-size: 0.7rem;
+    }
+
+    .admin-nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .admin-nav-links a {
+      color: #2b3550;
+      text-decoration: none;
+      font-size: 0.94rem;
+      transition: color 0.25s ease;
+    }
+
+    .admin-nav-links a:hover {
+      color: #2E7D5C;
+    }
+
+    .admin-nav-links a.back-home {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(46, 125, 92, 0.08);
+      color: #2E7D5C;
+      font-weight: 500;
+    }
+
+    .admin-nav-links a.back-home:hover {
+      background: rgba(46, 125, 92, 0.12);
+      color: #2E7D5C;
+    }
+
+    .admin-page {
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, #2E7D5C 0%, #245e49 120%);
+      color: white;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .admin-header > div:first-child span {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+
+    .admin-header h1 {
+      color: white;
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .admin-header p {
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .admin-actions .button {
+      padding: 0.625rem 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 0 2rem;
+    }
+
+    .admin-stat {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-stat strong {
+      display: block;
+      font-size: 2rem;
+      color: #2E7D5C;
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-stat span {
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2rem;
+      padding: 0 2rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .admin-tab-button {
+      background: none;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .admin-tab-button:hover {
+      color: #2E7D5C;
+    }
+
+    .admin-tab-button.is-active {
+      color: #2E7D5C;
+      border-bottom-color: #2E7D5C;
+    }
+
+    .admin-tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .admin-tab-content.is-active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .admin-panel-card {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 0 2rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-panel-head {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .admin-panel-head h2 {
+      margin: 0 0 0.5rem;
+      color: #333;
+    }
+
+    .admin-panel-head p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .admin-status {
+      padding: 0.75rem 1rem;
+      background: #f0f4ff;
+      color: #2E7D5C;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-align: right;
+      min-width: 200px;
+    }
+
+    .admin-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .admin-empty {
+      text-align: center;
+      color: #999;
+      padding: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .admin-testimonial-card,
+    .admin-form-card,
+    .admin-news-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 1rem;
+      background: #fafafa;
+      transition: all 0.2s ease;
+      min-height: 180px;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .admin-testimonial-card:hover,
+    .admin-form-card:hover,
+    .admin-news-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    .admin-testimonial-top,
+    .admin-form-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.25rem;
+      gap: 0.75rem;
+    }
+
+    .admin-testimonial-top > div:first-child,
+    .admin-form-top > div:first-child {
+      flex: 1;
+    }
+
+    .admin-testimonial-top strong,
+    .admin-form-top strong {
+      display: block;
+      color: #333;
+      margin-bottom: 0.2rem;
+    }
+
+    .admin-testimonial-top span,
+    .admin-form-top span {
+      color: #666;
+      font-size: 0.82rem;
+    }
+
+    .admin-badge {
+      display: inline-block;
+      padding: 0.375rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .admin-badge.is-pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .admin-badge.is-approved {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .admin-badge.is-rejected {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .admin-badge.is-new {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .admin-badge.is-reviewed {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .admin-quote,
+    .admin-form-content {
+      color: #333;
+      margin: 0.25rem 0 0;
+      line-height: 1.45;
+      font-size: 0.9rem;
+    }
+
+    .admin-meta {
+      color: #999;
+      font-size: 0.76rem;
+      margin: 0;
+    }
+
+    .admin-actions-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .admin-actions-row .button {
+      flex: 1;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .admin-news-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-row label {
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: #2E7D5C;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
+
+    .admin-news-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.25rem;
+      gap: 0.75rem;
+    }
+
+    .admin-news-card-title {
+      flex: 1;
+    }
+
+    .admin-news-card-title strong {
+      display: block;
+      color: #333;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .admin-news-card-date {
+      color: #666;
+      font-size: 0.78rem;
+    }
+
+    .admin-news-card-description {
+      color: #333;
+      margin: 0.25rem 0 0;
+      line-height: 1.45;
+      font-size: 0.9rem;
+    }
+
+    .admin-news-card-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .admin-news-card-actions .button {
+      flex: 1;
+      padding: 0.45rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .admin-news-form {
+        gap: 1rem;
+      }
+
+      .admin-list {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        gap: 0.35rem;
+      }
+
+      .form-row label {
+        font-size: 0.9rem;
+      }
+
+      .form-row input,
+      .form-row textarea {
+        font-size: 0.9rem;
+        padding: 0.65rem;
+      }
+
+      .admin-news-card {
+        padding: 0.95rem;
+        min-height: 0;
+      }
+
+      .admin-news-card-actions {
+        flex-direction: column;
+      }
+
+      .admin-news-card-actions .button {
+        width: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .admin-actions {
+        width: 100%;
+      }
+
+      .admin-tabs {
+        overflow-x: auto;
+      }
+
+      .admin-panel-head {
+        flex-direction: column;
+      }
+
+      .admin-status {
+        width: 100%;
+        text-align: left;
+      }
+
+      .admin-panel-card {
+        margin: 0 1rem 2rem;
+        padding: 1rem;
+      }
+
+      .admin-actions-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body class="admin-dashboard-body">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="admin-site-header">
+    <nav class="admin-navbar" aria-label="Admin navigation">
+      <a class="admin-brand" href="index.html">
+        <img src="images/logo.jpeg" alt="Hillfort logo" class="admin-brand-mark" />
+        <div class="admin-brand-text">
+          <strong>Hillfort Matriculation Higher Secondary School</strong>
+          <small>Admin Panel</small>
+        </div>
+      </a>
+      <div class="admin-nav-links">
+        <a href="index.html" class="back-home">← Back to Site</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="admin-page">
+    <section class="admin-header">
+      <div>
+        <span class="eyebrow">Admin Control Center</span>
+        <h1>Dashboard</h1>
+        <p>Manage testimonials, contact forms, and admission enquiries.</p>
+      </div>
+      <div class="admin-actions">
+        <button class="button button-secondary" type="button" data-refresh>Refresh</button>
+        <button class="button button-primary" type="button" data-logout>Logout</button>
+      </div>
+    </section>
+
+    <section class="admin-stats" data-stats-container></section>
+
+    <div class="admin-tabs">
+      <button class="admin-tab-button is-active" type="button" data-tab="testimonials">Testimonials</button>
+      <button class="admin-tab-button" type="button" data-tab="contact">Contact Forms</button>
+      <button class="admin-tab-button" type="button" data-tab="admissions">Admission Enquiries</button>
+      <button class="admin-tab-button" type="button" data-tab="news-events">News & Events</button>
+    </div>
+
+    <!-- Testimonials Tab -->
+    <div class="admin-tab-content is-active" data-tab-content="testimonials">
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Pending Testimonials</h2>
+            <p>Review and approve or reject new testimonials before publishing.</p>
+          </div>
+          <p class="admin-status" data-admin-status aria-live="polite"></p>
+        </div>
+        <div class="admin-list" data-pending-testimonials></div>
+      </section>
+
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Testimonials History</h2>
+            <p>Previously approved and rejected testimonials.</p>
+          </div>
+        </div>
+        <div class="admin-list" data-history-testimonials></div>
+      </section>
+    </div>
+
+    <!-- Contact Forms Tab -->
+    <div class="admin-tab-content" data-tab-content="contact">
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Contact Form Submissions</h2>
+            <p>View and manage contact form submissions from visitors.</p>
+          </div>
+        </div>
+        <div class="admin-list" data-contact-forms></div>
+      </section>
+    </div>
+
+    <!-- Admissions Tab -->
+    <div class="admin-tab-content" data-tab-content="admissions">
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Admission Enquiries</h2>
+            <p>Review admission applications and enquiries from prospective parents.</p>
+          </div>
+        </div>
+        <div class="admin-list" data-admission-forms></div>
+      </section>
+    </div>
+    <!-- News & Events Tab -->
+    <div class="admin-tab-content" data-tab-content="news-events">
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Add News or Event</h2>
+            <p>Create new news items or events to be displayed on the News & Events page.</p>
+          </div>
+        </div>
+        <form class="admin-news-form" id="add-news-form" data-news-form>
+          <div class="form-row">
+            <label for="news-title">Title *</label>
+            <input type="text" id="news-title" name="title" required placeholder="e.g., Annual Day Celebration" />
+          </div>
+          <div class="form-row">
+            <label for="news-description">Description *</label>
+            <textarea id="news-description" name="description" required placeholder="Details about the news or event..." rows="4"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="news-date">Event Date</label>
+            <input type="date" id="news-date" name="eventDate" />
+          </div>
+          <div class="form-row" style="margin-top: 1.5rem;">
+            <button class="button button-primary" type="submit">Add News/Event</button>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">Items are saved as drafts and can be published from the list below.</p>
+          </div>
+        </form>
+      </section>
+
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Published News & Events</h2>
+            <p>Active items displayed on the main website.</p>
+          </div>
+        </div>
+        <div class="admin-list" data-published-news></div>
+      </section>
+
+      <section class="admin-panel-card">
+        <div class="admin-panel-head">
+          <div>
+            <h2>Draft News & Events</h2>
+            <p>Items not yet published. Edit, delete, or publish them here.</p>
+          </div>
+        </div>
+        <div class="admin-list" data-draft-news></div>
+      </section>
+    </div>  </main>
+
+  <script src="public/js/admin-panel.js"></script>
+</body>
+</html>

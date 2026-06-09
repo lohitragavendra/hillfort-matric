@@ -1,0 +1,23 @@
+{
+  "name": "hill-fort-cbse-school",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hillfort Matriculation Higher Secondary School website with admin testimonial moderation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mongodb": "^7.2.0",
+    "mongoose": "^8.1.0"
+  }
+}

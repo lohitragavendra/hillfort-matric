@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Parent testimonials for Hillfort Matriculation Higher Secondary School." />
+  <title>Testimonials | Hillfort Matriculation Higher Secondary School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" id="top"><nav class="navbar" aria-label="Primary navigation"><div class="brand-wrap"><a class="brand" href="index.html" aria-label="Hillfort Matriculation Higher Secondary School home"><img src="images/logo.jpeg" alt="Hillfort logo" class="brand-mark" /><span class="brand-text"><strong>Hillfort Matriculation Higher Secondary School</strong></span></a></div><button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Menu</span></button><div class="nav-links" id="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="academics.html">Academics</a><a href="activities.html">Activities</a><a href="facilities.html">Facilities</a><a href="gallery.html">Gallery</a><a href="admissions.html">Admissions</a><a href="news-events.html">News & Events</a><a class="active" href="testimonials.html">Testimonials</a><a href="contact.html">Contact</a></div><a class="cta-pill" href="mandatory-disclosure.html">Mandatory Disclosure</a></nav></header>
+
+  <main id="main-content">
+    <section class="page-hero page-hero-testimonials"><div class="container"><span class="eyebrow">Testimonials</span><h1>What parents say about Hillfort Matriculation Higher Secondary School</h1><p>Families value our caring teachers, balanced growth approach, and student confidence outcomes.</p></div></section>
+    <section class="section testimonials-section">
+      <div class="container">
+        <div class="testimonial-shell reveal">
+          <button class="slider-arrow prev" type="button" aria-label="Previous testimonial" data-test-prev>‹</button>
+          <div class="testimonial-card" data-testimonial></div>
+          <button class="slider-arrow next" type="button" aria-label="Next testimonial" data-test-next>›</button>
+        </div>
+        <form class="enquiry-form testimonial-submit-form reveal" id="testimonial-form" action="/api/testimonials/submit" method="POST">
+          <h3>Share Your Experience</h3>
+          <p class="testimonial-form-note">If you would like to leave feedback about the school, send it here and the admin team will review it before publishing.</p>
+          <div class="form-grid">
+            <label>Full Name<input type="text" name="name" placeholder="Your name" required /></label>
+            <label>Relationship / Role<input type="text" name="role" placeholder="Parent, alumnus, customer..." required /></label>
+          </div>
+          <label>Email Address<input type="email" name="email" placeholder="you@example.com" /></label>
+          <label>Your Testimonial<textarea name="testimonial" rows="5" placeholder="Tell us what you liked about Hillfort Matriculation Higher Secondary School..." required></textarea></label>
+          <p class="form-status" data-testimonial-status aria-live="polite"></p>
+          <button class="button button-primary" type="submit">Send Testimonial</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-apply" href="admissions.html">Apply Now</a>
+  <a class="whatsapp-button" href="https://wa.me/919442607366" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
+  <footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img src="images/logo.jpeg" alt="Hillfort logo" class="brand-mark" /><span class="brand-text"><strong>Hillfort Matriculation Higher Secondary School</strong></span></div><p>Pre-KG to Grade IX  education in Kotagiri with a warm, value-driven campus culture.</p></div><div><h3>Quick Links</h3><div class="footer-links"><a href="about.html">About</a><a href="academics.html">Academics</a><a href="gallery.html">Gallery</a><a href="admissions.html">Admissions</a><a href="contact.html">Contact</a></div></div><div><h3>Contact</h3><p>Keircombai, Milidhane Post, Kotagiri</p><p>9442607366 | 9787041814</p><p>hillfortmatricschool@gmail.com</p></div><div><h3>Newsletter</h3><form class="newsletter" id="newsletter-form"><input type="email" placeholder="Enter email address" required /><button class="button button-secondary" type="submit">Subscribe</button></form></div></div><div class="footer-bottom"><p>© 2026 Hillfort Matriculation Higher Secondary School. All rights reserved.</p><p>Designed by LCC Kotagiri</p></div></footer>
+
+  <template id="testimonial-template">
+    <article class="testimonial-content">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <p data-quote></p>
+      <div><strong data-name></strong><span data-role></span></div>
+    </article>
+  </template>
+  <script src="js/script.js"></script>
+</body>
+</html>
